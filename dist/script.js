@@ -972,11 +972,14 @@ function () {
 
     this.btns = document.querySelectorAll(btns);
     this.slideIndex = 1;
+    this.block = document.querySelector('.hanson');
   }
 
   _createClass(Slider, [{
     key: "showSlides",
     value: function showSlides(n) {
+      this.block.style.display = 'none';
+
       if (n > this.slides.length) {
         // Если слайдов больше чем n тогда вернемся на первый
         this.slideIndex = 1;
@@ -992,11 +995,24 @@ function () {
       });
       this.slides[this.slideIndex - 1].classList.add('animated', 'fadeIn');
       this.slides[this.slideIndex - 1].style.display = 'block'; // начинаем с 0
+
+      if (n === 3) {
+        this.showBlock('.hanson', 3000);
+      }
     }
   }, {
     key: "plusSlides",
     value: function plusSlides(n) {
       this.showSlides(this.slideIndex += n); // На второй страницы чтобы можно было перелистывать прибавлять
+    }
+  }, {
+    key: "showBlock",
+    value: function showBlock(selectorBlock, time) {
+      var block = document.querySelector(selectorBlock);
+      setTimeout(function () {
+        block.style.display = 'block';
+        block.classList.add('animated', 'slideInUp');
+      }, time);
     }
   }, {
     key: "render",
