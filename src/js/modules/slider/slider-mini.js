@@ -80,7 +80,7 @@ export default class MiniSlider extends Slider {
         this.decorizeSlides();
 
         if(this.autoplay) {
-            setInterval(() => this.nextSlide(), 5000)
+            setInterval(() => this.nextSlide(), 5000);
         }
     }
 }
