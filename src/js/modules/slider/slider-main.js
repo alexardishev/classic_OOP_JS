@@ -2,15 +2,17 @@ import Slider from "./slider";
 
 
 export default class MainSlider extends Slider {
-    constructor(btns) {
-        super(btns); // Метод чтобы получить доступ к свойствам класса
+    constructor(reer) {
+        super(reer); // Метод чтобы получить доступ к свойствам класса
+        console.log(reer);
         
     }
-
     
     showSlides (n) {
-        
-        this.block.style.display = 'none';
+        try{
+            this.block.style.display = 'none';
+        } catch(e) {}
+
         if (n > this.slides.length) { // Если слайдов больше чем n тогда вернемся на первый
             this.slideIndex = 1;
         } 
@@ -39,29 +41,53 @@ export default class MainSlider extends Slider {
     
     }
 
-    showBlock(selectorBlock, time) {
+    showBlock(selectorBlock = null, time) {
         const block = document.querySelector(selectorBlock);
-        
-        setTimeout(()=> {
-            block.style.display = 'block';  
-            block.classList.add('animated', 'slideInUp');
-        }, time);
+
+            if(block) {
+                setTimeout(()=> {
+                    block.style.display = 'block';  
+                    block.classList.add('animated', 'slideInUp');
+                }, time);
+            }
+           
+
+       
     }
 
+    bindTriggers() {
+                    this.btns.forEach(item => {
+                item.addEventListener('click', ()=> { // При нажатии на кнопку вызываем функцию переключения вперед
+                    this.plusSlides(1); // И передаем туда 1 на сколько слайдер будет переключаться
+                });
+    
+                item.parentNode.previousElementSibling.addEventListener('click', (e)=> {
+                    e.preventDefault();
+                    this.slideIndex = 1;
+                    this.showSlides(this.slideIndex);
+                });
+            });
+            try{
+
+                document.querySelectorAll('.prevmodule').forEach(item => {
+                    item.addEventListener('click', ()=> {
+                        this.plusSlides(-1)
+                    });
+                });
+                document.querySelectorAll('.nextmodule').forEach(item => {
+                    item.addEventListener('click', (e)=> {
+                        e.stopPropagation();
+                        this.plusSlides(1)
+                    });
+                });
+            } catch{}
+    }
 
     render() {
-        this.btns.forEach(item => {
-            item.addEventListener('click', ()=> { // При нажатии на кнопку вызываем функцию переключения вперед
-                this.plusSlides(1); // И передаем туда 1 на сколько слайдер будет переключаться
-            });
+         if(this.container){
 
-            item.parentNode.previousElementSibling.addEventListener('click', (e)=> {
-                e.preventDefault();
-                this.slideIndex = 1;
-                this.showSlides(this.slideIndex);
-            });
-        });
-
-        this.showSlides(this.slideIndex);
+            this.showSlides(this.slideIndex);
+            this.bindTriggers();
+        } 
     }
 }
