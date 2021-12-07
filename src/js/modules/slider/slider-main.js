@@ -5,6 +5,7 @@ export default class MainSlider extends Slider {
     constructor(reer) {
         super(reer); // Метод чтобы получить доступ к свойствам класса
         console.log(reer);
+        console.log(this.slides);
         
     }
     
@@ -20,6 +21,7 @@ export default class MainSlider extends Slider {
         if (n < 1) { // Если n меньше единицы, тогда в конец идем
             this.slideIndex =  this.slides.length;
         }
+        
 
 
         this.slides.forEach(slide => {

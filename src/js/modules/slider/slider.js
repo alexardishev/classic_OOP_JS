@@ -16,6 +16,8 @@ export default class Slider {
         this.autoplay = autoplay;
         this.slideIndex = 1;
         this.block = document.querySelector('.hanson');
+
+        
     }
 
 }

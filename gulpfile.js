@@ -4,7 +4,9 @@ const gulp = require("gulp");
 const webpack = require("webpack-stream");
 const browsersync = require("browser-sync");
 
-const dist = "C:/MAMP/htdocs/classicOop/";
+const dist = "./dist/";
+
+// const dist = "C:/MAMP/htdocs/classicOop/";
 
 // const dist = "/Applications/MAMP/htdocs/test"; // Ссылка на вашу папку на сервере
 
